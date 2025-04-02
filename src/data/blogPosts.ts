@@ -1,3 +1,4 @@
+import { marked } from "marked";  // Import the marked package
 
 export interface BlogPost {
   id: number;
