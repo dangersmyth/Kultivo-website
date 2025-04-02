@@ -7,7 +7,7 @@ export interface BlogPost {
   type: "Article" | "Quiz";
   imageUrl: string;
   excerpt: string;
-  content?: string;
+  content?: string;  // The content field will store Markdown content
 }
 
 export const blogPosts: BlogPost[] = [
@@ -52,6 +52,20 @@ export const blogPosts: BlogPost[] = [
     excerpt: "An in-depth guide to understanding how interest rates work and how they impact your borrowing decisions."
   }
 ];
+
+// Function to get a specific blog post by its slug
+export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {
+  return blogPosts.find(post => post.slug === slug);
+};
+
+// Function to render markdown content as HTML
+export const renderBlogContent = (slug: string): string | undefined => {
+  const blogPost = getBlogPostBySlug(slug);
+  if (blogPost && blogPost.content) {
+    return marked(blogPost.content);  // Convert markdown content to HTML
+  }
+  return undefined;
+};
 
 export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {
   return blogPosts.find(post => post.slug === slug);
